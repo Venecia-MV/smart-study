@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Decks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333
+        }
+        .deck-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            background-color: #f9f9f9
+        }
+        .deck-card h3 {
+            margin-top: 0;
+            color: #2c5aa0;
+        }
+        .deck-card p {
+            color:#666;
+        }
+        .deck-card small {
+            color: #999;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2c5aa0;
+            color:white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .btn:hover {
+            background-color: #1e3a6f;
+        }
+        .empty-message {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Study Decks</h1>
+
+    <a href="/decks/new" class="btn">+ Create New Deck</a>
+
+    <!-- If there are no decks, show this message -->
+    <div th:if="${#lists.isEmpty(decks)}" class="empty-message">
+        <p>You don't have any decks yet. Create your first one!</p>
+    </div>
+
+    <!-- Loop through all decks and display them -->
+    <div th:each="deck : ${decks}" class="deck-card">
+        <h3 th:text="${deck.name}">Deck Name</h3>
+        <p th:text="${deck.description}">Deck Description</p>
+        <small th:text="'Created: ' + ${#temporals.format(deck.createdDate, 'MMM dd, yyyy')}">Created: Jan 01, 2024</small>
+    </div>
+
+</body>
+</html>
