@@ -43,4 +43,11 @@ public class DeckController {
         deckRepository.save(deck);
         return "redirect:/decks";
     }
+
+    //Deletes a deck
+    @PostMapping("/{id}/delete")
+    public String deleteDeck(@PathVariable Long id) {
+        deckRepository.deleteById(id);
+        return "redirect:/decks";
+    }
 }

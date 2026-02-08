@@ -48,6 +48,19 @@
             padding: 40px;
             font-style: italic;
         }
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -64,7 +77,13 @@
     <div th:each="deck : ${decks}" class="deck-card">
         <h3 th:text="${deck.name}">Deck Name</h3>
         <p th:text="${deck.description}">Deck Description</p>
+
         <small th:text="'Created: ' + ${#temporals.format(deck.createdDate, 'MMM dd, yyyy')}">Created: Jan 01, 2024</small>
+
+        <!-- Delete button -->
+        <form th:action="@{/decks/{id}/delete(id=${deck.id})}" method="post" style="display: inline; margin-top: 10px;">
+            <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this deck?');">Delete</button>
+        </form>
     </div>
 
 </body>
