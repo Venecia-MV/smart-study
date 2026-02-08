@@ -61,6 +61,19 @@
         .btn-delete:hover {
             background-color: #c82333;
         }
+        .btn-view {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .btn-view:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
@@ -77,8 +90,12 @@
     <div th:each="deck : ${decks}" class="deck-card">
         <h3 th:text="${deck.name}">Deck Name</h3>
         <p th:text="${deck.description}">Deck Description</p>
-
         <small th:text="'Created: ' + ${#temporals.format(deck.createdDate, 'MMM dd, yyyy')}">Created: Jan 01, 2024</small>
+
+        <!-- View Cards button -->
+        <div style="margin-top: 15px;">
+            <a th:href="@{/decks/{id}/cards(id=${deck.id})}" class="btn-view">View Cards</a>
+        </div>
 
         <!-- Delete button -->
         <form th:action="@{/decks/{id}/delete(id=${deck.id})}" method="post" style="display: inline; margin-top: 10px;">
